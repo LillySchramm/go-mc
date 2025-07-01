@@ -94,6 +94,7 @@ func (c *Client) join(addr string, options JoinOptions, version int32) error {
 	if err != nil {
 		return LoginErr{"connect server", err}
 	}
+	defer conn.Close()
 
 	// Handshake
 	err = conn.WritePacket(pk.Marshal(
@@ -112,11 +113,11 @@ func (c *Client) join(addr string, options JoinOptions, version int32) error {
 		return err
 	}
 
-	// Configuration
-	if err := c.joinConfiguration(conn); err != nil {
-		return err
-	}
-	c.Conn = warpConn(conn, options.QueueRead, options.QueueWrite)
+	// // Configuration
+	// if err := c.joinConfiguration(conn); err != nil {
+	// 	return err
+	// }
+	// c.Conn = warpConn(conn, options.QueueRead, options.QueueWrite)
 	return nil
 }
 
