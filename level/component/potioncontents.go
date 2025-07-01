@@ -3,7 +3,7 @@ package component
 import (
 	"io"
 
-	pk "github.com/Tnze/go-mc/net/packet"
+	pk "github.com/LillySchramm/go-mc/net/packet"
 )
 
 var _ DataComponent = (*PotionContents)(nil)

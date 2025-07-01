@@ -2,7 +2,7 @@
 
 package id_id
 
-import "github.com/Tnze/go-mc/chat"
+import "github.com/LillySchramm/go-mc/chat"
 
 func init() { chat.SetLanguage(Map) }
 

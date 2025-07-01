@@ -3,8 +3,8 @@ package component
 import (
 	"io"
 
-	"github.com/Tnze/go-mc/level/block"
-	pk "github.com/Tnze/go-mc/net/packet"
+	"github.com/LillySchramm/go-mc/level/block"
+	pk "github.com/LillySchramm/go-mc/net/packet"
 )
 
 var _ DataComponent = (*DebugStickState)(nil)

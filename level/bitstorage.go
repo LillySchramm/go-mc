@@ -5,7 +5,7 @@ import (
 	"io"
 	"math"
 
-	pk "github.com/Tnze/go-mc/net/packet"
+	pk "github.com/LillySchramm/go-mc/net/packet"
 )
 
 const (

@@ -5,7 +5,7 @@ import (
 
 	"github.com/google/uuid"
 
-	pk "github.com/Tnze/go-mc/net/packet"
+	pk "github.com/LillySchramm/go-mc/net/packet"
 )
 
 type Property struct {

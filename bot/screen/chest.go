@@ -3,8 +3,8 @@ package screen
 import (
 	"errors"
 
-	"github.com/Tnze/go-mc/chat"
-	"github.com/Tnze/go-mc/data/inventory"
+	"github.com/LillySchramm/go-mc/chat"
+	"github.com/LillySchramm/go-mc/data/inventory"
 )
 
 type Chest struct {

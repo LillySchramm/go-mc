@@ -10,9 +10,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/Tnze/go-mc/nbt"
-	"github.com/Tnze/go-mc/nbt/dynbt"
-	"github.com/Tnze/go-mc/save/region"
+	"github.com/LillySchramm/go-mc/nbt"
+	"github.com/LillySchramm/go-mc/nbt/dynbt"
+	"github.com/LillySchramm/go-mc/save/region"
 	"github.com/google/uuid"
 )
 

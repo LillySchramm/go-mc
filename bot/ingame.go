@@ -4,8 +4,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/Tnze/go-mc/data/packetid"
-	pk "github.com/Tnze/go-mc/net/packet"
+	"github.com/LillySchramm/go-mc/data/packetid"
+	pk "github.com/LillySchramm/go-mc/net/packet"
 )
 
 // HandleGame receive server packet and response them correctly.

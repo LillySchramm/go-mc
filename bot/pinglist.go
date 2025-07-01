@@ -9,9 +9,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/Tnze/go-mc/data/packetid"
-	mcnet "github.com/Tnze/go-mc/net"
-	pk "github.com/Tnze/go-mc/net/packet"
+	"github.com/LillySchramm/go-mc/data/packetid"
+	mcnet "github.com/LillySchramm/go-mc/net"
+	pk "github.com/LillySchramm/go-mc/net/packet"
 )
 
 // PingAndList check server status and list online player.

@@ -3,8 +3,8 @@ package basic
 import (
 	"time"
 
-	"github.com/Tnze/go-mc/data/packetid"
-	pk "github.com/Tnze/go-mc/net/packet"
+	"github.com/LillySchramm/go-mc/data/packetid"
+	pk "github.com/LillySchramm/go-mc/net/packet"
 )
 
 const keepAliveDuration = time.Second * 20

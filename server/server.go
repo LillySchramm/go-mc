@@ -32,9 +32,9 @@ import (
 	"errors"
 	"log"
 
-	"github.com/Tnze/go-mc/data/packetid"
-	"github.com/Tnze/go-mc/net"
-	pk "github.com/Tnze/go-mc/net/packet"
+	"github.com/LillySchramm/go-mc/data/packetid"
+	"github.com/LillySchramm/go-mc/net"
+	pk "github.com/LillySchramm/go-mc/net/packet"
 )
 
 const (
