@@ -18,30 +18,30 @@ import (
 // Returns a JSON data with server status, and the delay.
 //
 // For more information for JSON format, see https://wiki.vg/Server_List_Ping#Response
-func PingAndList(addr string) ([]byte, time.Duration, error) {
+func PingAndList(addr string, version int32) ([]byte, time.Duration, error) {
 	conn, err := mcnet.DialMC(addr)
 	if err != nil {
 		return nil, 0, LoginErr{"dial connection", err}
 	}
-	return pingAndList(context.Background(), addr, conn)
+	return pingAndList(context.Background(), addr, conn, version)
 }
 
 // PingAndListTimeout is the version of PingAndList with max request time.
-func PingAndListTimeout(addr string, timeout time.Duration) ([]byte, time.Duration, error) {
+func PingAndListTimeout(addr string, timeout time.Duration, version int32) ([]byte, time.Duration, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
-	return PingAndListContext(ctx, addr)
+	return PingAndListContext(ctx, addr, version)
 }
 
-func PingAndListContext(ctx context.Context, addr string) ([]byte, time.Duration, error) {
+func PingAndListContext(ctx context.Context, addr string, version int32) ([]byte, time.Duration, error) {
 	conn, err := mcnet.DefaultDialer.DialMCContext(ctx, addr)
 	if err != nil {
 		return nil, 0, err
 	}
-	return pingAndList(ctx, addr, conn)
+	return pingAndList(ctx, addr, conn, version)
 }
 
-func pingAndList(ctx context.Context, addr string, conn *mcnet.Conn) (data []byte, delay time.Duration, err error) {
+func pingAndList(ctx context.Context, addr string, conn *mcnet.Conn, version int32) (data []byte, delay time.Duration, err error) {
 	if deadline, hasDeadline := ctx.Deadline(); hasDeadline {
 		if err := conn.Socket.SetDeadline(deadline); err != nil {
 			return nil, 0, err
@@ -81,9 +81,9 @@ func pingAndList(ctx context.Context, addr string, conn *mcnet.Conn) (data []byt
 	const Handshake = 0x00
 	// 握手
 	err = conn.WritePacket(pk.Marshal(
-		Handshake,                  // Handshake packet ID
-		pk.VarInt(ProtocolVersion), // Protocol version
-		pk.String(host),            // Server's address
+		Handshake,          // Handshake packet ID
+		pk.VarInt(version), // Protocol version
+		pk.String(host),    // Server's address
 		pk.UnsignedShort(port),
 		pk.Byte(1),
 	))

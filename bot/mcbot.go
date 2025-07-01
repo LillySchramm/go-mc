@@ -19,8 +19,7 @@ import (
 
 // ProtocolVersion is the protocol version number of minecraft net protocol
 const (
-	ProtocolVersion = 767
-	DefaultPort     = mcnet.DefaultPort
+	DefaultPort = mcnet.DefaultPort
 )
 
 type JoinOptions struct {
@@ -40,18 +39,18 @@ type JoinOptions struct {
 
 // JoinServer connect a Minecraft server for playing the game.
 // Using roughly the same way to parse address as minecraft.
-func (c *Client) JoinServer(addr string) (err error) {
-	return c.JoinServerWithOptions(addr, JoinOptions{})
+func (c *Client) JoinServer(addr string, version int32) (err error) {
+	return c.JoinServerWithOptions(addr, JoinOptions{}, version)
 }
 
 // JoinServerWithDialer is similar to JoinServer but using a net.Dialer.
-func (c *Client) JoinServerWithDialer(dialer *net.Dialer, addr string) (err error) {
+func (c *Client) JoinServerWithDialer(dialer *net.Dialer, addr string, version int32) (err error) {
 	return c.JoinServerWithOptions(addr, JoinOptions{
 		MCDialer: (*mcnet.Dialer)(dialer),
-	})
+	}, version)
 }
 
-func (c *Client) JoinServerWithOptions(addr string, options JoinOptions) (err error) {
+func (c *Client) JoinServerWithOptions(addr string, options JoinOptions, version int32) (err error) {
 	if options.MCDialer == nil {
 		options.MCDialer = &mcnet.DefaultDialer
 	}
@@ -64,10 +63,10 @@ func (c *Client) JoinServerWithOptions(addr string, options JoinOptions) (err er
 	if options.QueueWrite == nil {
 		options.QueueWrite = queue.NewLinkedQueue[pk.Packet]()
 	}
-	return c.join(addr, options)
+	return c.join(addr, options, version)
 }
 
-func (c *Client) join(addr string, options JoinOptions) error {
+func (c *Client) join(addr string, options JoinOptions, version int32) error {
 	const Handshake = 0x00
 
 	// Split Host and Port. The DialMCContext will do this once,
@@ -99,9 +98,9 @@ func (c *Client) join(addr string, options JoinOptions) error {
 	// Handshake
 	err = conn.WritePacket(pk.Marshal(
 		Handshake,
-		pk.VarInt(ProtocolVersion), // Protocol version
-		pk.String(host),            // Host
-		pk.UnsignedShort(port),     // Port
+		pk.VarInt(version),     // Protocol version
+		pk.String(host),        // Host
+		pk.UnsignedShort(port), // Port
 		pk.VarInt(2),
 	))
 	if err != nil {
