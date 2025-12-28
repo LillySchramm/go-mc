@@ -143,6 +143,7 @@ type Properties struct {
 type BlockState struct {
 	Name       string
 	Properties Properties `nbt:"Properties"`
+	ID int `nbt:"-"`
 }
 
 type BiomeState string
