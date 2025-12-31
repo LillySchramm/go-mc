@@ -10,9 +10,16 @@ import (
 	"github.com/LillySchramm/go-mc/nbt"
 )
 
+type BlockEntity struct {
+	X  int32  `nbt:"x"`
+	Y  int32  `nbt:"y"`
+	Z  int32  `nbt:"z"`
+	ID string `nbt:"id"`
+}
+
 // Chunk is 16* chunk
 type Chunk struct {
-	BlockEntities  []nbt.RawMessage `nbt:"block_entities"`
+	BlockEntities  []BlockEntity `nbt:"block_entities"`
 	BlockTicks     nbt.RawMessage   `nbt:"block_ticks"`
 	CarvingMasks   map[string][]uint64
 	DataVersion    int32
