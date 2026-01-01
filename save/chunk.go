@@ -9,12 +9,34 @@ import (
 
 	"github.com/LillySchramm/go-mc/nbt"
 )
+type SignText struct {
+	HasGlowingText bool     `nbt:"has_glowing_text,omitempty"`
+	Color          string   `nbt:"color,omitempty"`
+	Messages       []string `nbt:"messages,omitempty"`
+}
 
 type BlockEntity struct {
-	X  int32  `nbt:"x"`
-	Y  int32  `nbt:"y"`
-	Z  int32  `nbt:"z"`
-	ID string `nbt:"id"`
+	X  int32  `nbt:"x,omitempty"`
+	Y  int32  `nbt:"y,omitempty"`
+	Z  int32  `nbt:"z,omitempty"`
+	ID string `nbt:"id,omitempty"`
+
+	// Diverse
+	CustomName string `nbt:"CustomName,omitempty"`
+
+	// minecraft:sign
+	// minecraft:hanging_sign
+	IsWaxed   bool     `nbt:"is_waxed,omitempty"`
+	FrontText SignText `nbt:"front_text,omitempty"`
+	BackText  SignText `nbt:"back_text,omitempty"`
+
+	// minecraft:banner
+	Patterns []Pattern `nbt:"patterns,omitempty"`
+}
+
+type Pattern struct {
+	Color   string         `nbt:"color"`
+	Pattern nbt.RawMessage `nbt:"pattern"`
 }
 
 // Chunk is 16* chunk

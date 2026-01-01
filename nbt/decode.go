@@ -18,6 +18,13 @@ func Unmarshal(data []byte, v any) error {
 	return err
 }
 
+func UnmarshalNetwork(data []byte, v any) error {
+	decoder := NewDecoder(bytes.NewReader(data))
+	decoder.NetworkFormat(true)
+	_, err := decoder.Decode(v)
+	return err
+}
+
 // Decode method decodes an NBT value from the reader underline the Decoder into v.
 // Internally try to handle all possible v by reflection,
 // but the type of v must matches the NBT value logically.
