@@ -9,6 +9,7 @@ import (
 
 	"github.com/LillySchramm/go-mc/nbt"
 )
+
 type SignText struct {
 	HasGlowingText bool     `nbt:"has_glowing_text,omitempty"`
 	Color          string   `nbt:"color,omitempty"`
@@ -32,6 +33,43 @@ type BlockEntity struct {
 
 	// minecraft:banner
 	Patterns []Pattern `nbt:"patterns,omitempty"`
+
+	// minecraft:skull
+	CustomNameSkull string          `nbt:"custom_name,omitempty"`
+	NoteBlockSound  string          `nbt:"note_block_sound,omitempty"`
+	Profile         *nbt.RawMessage `nbt:"profile,omitempty"`
+
+	// minecraft:mob_spawner
+	Delay               int16            `nbt:"Delay,omitempty"`
+	MaxNearbyEntities   int16            `nbt:"MaxNearbyEntities,omitempty"`
+	MaxSpawnDelay       int16            `nbt:"MaxSpawnDelay,omitempty"`
+	MinSpawnDelay       int16            `nbt:"MinSpawnDelay,omitempty"`
+	RequiredPlayerRange int16            `nbt:"RequiredPlayerRange,omitempty"`
+	SpawnCount          int16            `nbt:"SpawnCount,omitempty"`
+	SpawnData           *nbt.RawMessage  `nbt:"SpawnData,omitempty"`
+	SpawnPotentials     []nbt.RawMessage `nbt:"SpawnPotentials,omitempty"`
+	SpawnRange          int16            `nbt:"SpawnRange,omitempty"`
+
+	// minecraft:campfire
+	CookingTimes      []int32 `nbt:"CookingTimes,omitempty"`
+	CookingTotalTimes []int32 `nbt:"CookingTotalTimes,omitempty"`
+
+	// minecraft:chest
+	// minecraft:trapped_chest
+	Items []nbt.RawMessage `nbt:"Items,omitempty"` // also for minecraft:campfire
+	Lock  string           `nbt:"Lock,omitempty"`
+
+	// minecraft:trial_spawner
+	RequiredPlayerRangeTrial int32           `nbt:"required_player_range,omitempty"`
+	TargetCooldownLength     int32           `nbt:"target_cooldown_length,omitempty"`
+	NormalConfig             *nbt.RawMessage `nbt:"normal_config,omitempty"`
+	OminousConfig            *nbt.RawMessage `nbt:"ominous_config,omitempty"`
+	SpawnDataTrial           *nbt.RawMessage `nbt:"spawn_data,omitempty"`
+
+	// minecraft:vault
+	Config     *nbt.RawMessage `nbt:"config,omitempty"`
+	ServerData *nbt.RawMessage `nbt:"server_data,omitempty"`
+	SharedData *nbt.RawMessage `nbt:"shared_data,omitempty"`
 }
 
 type Pattern struct {
@@ -41,8 +79,8 @@ type Pattern struct {
 
 // Chunk is 16* chunk
 type Chunk struct {
-	BlockEntities  []BlockEntity `nbt:"block_entities"`
-	BlockTicks     nbt.RawMessage   `nbt:"block_ticks"`
+	BlockEntities  []BlockEntity  `nbt:"block_entities"`
+	BlockTicks     nbt.RawMessage `nbt:"block_ticks"`
 	CarvingMasks   map[string][]uint64
 	DataVersion    int32
 	Entities       []nbt.RawMessage    `nbt:"entities"`
@@ -172,7 +210,7 @@ type Properties struct {
 type BlockState struct {
 	Name       string
 	Properties Properties `nbt:"Properties"`
-	ID int `nbt:"-"`
+	ID         int        `nbt:"-"`
 }
 
 type BiomeState string
