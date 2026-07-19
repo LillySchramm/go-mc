@@ -193,6 +193,7 @@ type Properties struct {
 	Snowy                string `nbt:"snowy,omitempty"`
 	South                string `nbt:"south,omitempty"`
 	Stage                string `nbt:"stage,omitempty"`
+	PotentSulfurState    string `nbt:"potent_sulfur_state,omitempty"`
 	Thickness            string `nbt:"thickness,omitempty"`
 	Tilt                 string `nbt:"tilt,omitempty"`
 	Tip                  string `nbt:"tip,omitempty"`
